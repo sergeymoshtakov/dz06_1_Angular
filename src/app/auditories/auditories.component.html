@@ -1,0 +1,23 @@
+<h2>University</h2>
+
+<button (click)="sortByCapacity()">Sort by capacity</button>
+<button (click)="sortByName()">Sort by name</button>
+
+<select [(ngModel)]="selectedFaculty">
+    <option value="">All Faculties</option>
+    <option value="Biological Faculty">Biological Faculty</option>
+    <option value="Chemical Faculty">Chemical Faculty</option>
+    <option value="Computer Science Faculty">Computer Science Faculty</option>
+    <option value="Mathematical Faculty">Mathematical Faculty</option>
+</select>
+
+<select [(ngModel)]="selectedGroup">
+    <option value="">All Groups</option>
+    <option *ngFor="let group of groups" [value]="group.faculty">{{ group.name }}</option>
+</select>
+
+<div class="column">
+    <div class="item" *ngFor="let auditory of auditories | filter:selectedFilter | filterByFaculty:selectedFaculty | filterByGroup:selectedGroup; let i = index">
+        <app-auditory [auditory]="auditory"></app-auditory>
+    </div>
+</div>
